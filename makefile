@@ -1,10 +1,10 @@
 all: scanner
 
 scanner: lex.yy.c
-	gcc -Wall lex.yy.c -o scanner -ll
+	gcc -Wall lex.yy.c -o scanner -lfl
 
 lex.yy.c: scanner.l
-	lex scanner.l
+	flex scanner.l
 
 run: scanner
 	./scanner

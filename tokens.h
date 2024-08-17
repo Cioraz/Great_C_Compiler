@@ -86,7 +86,7 @@ enum TOKEN {
     CALLOC,
     REALLOC,
     FREE,
-    DEFINE,
+    //DEFINE,
     // handle fopen
     // derive
     // ifdef

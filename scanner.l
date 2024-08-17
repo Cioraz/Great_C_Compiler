@@ -9,13 +9,14 @@ alphabet [a-zA-Z]
 digit [0-9]
 newline [\n]
 tab [\t]
+single_char \'.\'
 underscore [_]
-invalid [~`@$]
-string \"(\\[nt\"'\\]|[^\n\"])*\"  {/* read abt this */}
+invalid [`@$]
+string \"(\\[nt\"'\\]|[^"\n\\])*\"  
 identifier ({alphabet}|{underscore})({alphabet}|{digit}|{underscore})*
 
 %%
-{space}* { /* ignore whitespace */ }
+{space}* { /* ignore whitespace and read abt string regexp */ }
 {tab}* { /* ignore tabs */ }
 newline { line_number++; }
 auto { return AUTO; }
@@ -40,7 +41,7 @@ register { return REGISTER; }
 return { return RETURN; }
 short { return SHORT; }
 signed { return SIGNED; }
-sizeof { return SIZEOF; } // need to implement
+sizeof\([^)]*\) { return SIZEOF; } 
 static { return STATIC; }
 struct { return STRUCT; }
 switch { return SWITCH; }
@@ -98,3 +99,28 @@ strlen return STRLEN;
 strcpy return STRCPY;
 strcat return STRCAT;
 strcmp return STRCMP;
+
+ceil return CEIL;
+floor return FLOOR;
+abs return FABS;
+log return LOG;
+sqrt return SQRT;
+pow return POW;
+exp return EXP;
+
+[+-]?{digit}+(\.{digit}+)? return SIGNED_CONST;
+[+-]?[0-9]*\.[0-9]+ return FLOAT_CONST;
+string return STRING_CONST;
+single_char return CHAR_CONST;
+
+{identifier}\[({identifier}|{digit}+)\] return ARR;
+%%
+
+int main(int argc,char **argv){
+    yylex();
+    return 0;
+}
+
+int yywrap(){
+    return 1;
+}
