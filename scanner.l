@@ -40,7 +40,7 @@ register { return REGISTER; }
 return { return RETURN; }
 short { return SHORT; }
 signed { return SIGNED; }
-sizeof\([^)]*\) { return SIZEOF; } // need to implement
+sizeof { return SIZEOF; } // need to implement
 static { return STATIC; }
 struct { return STRUCT; }
 switch { return SWITCH; }
@@ -98,27 +98,3 @@ strlen return STRLEN;
 strcpy return STRCPY;
 strcat return STRCAT;
 strcmp return STRCMP;
-
-ceil return CEIL;
-floor return FLOOR;
-fabs return FABS;
-log return LOG;
-sqrt return SQRT;
-pow return POW;
-exp return EXP;
-
-{digit}+ return INT_CONST;
-({digit}+)\.({digit}+) return FLOAT_CONST;
-[+-]?[0-9]+(\.{digit}+)? return SIGNED_CONST;
-string {return STRING_CONST;}
-%%
-
-int main(int argc, char **argv){
-    yylex();
-    return 0;
-}
-
-
-int yywrap(){
-	return 1;
-}

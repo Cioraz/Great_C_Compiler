@@ -9,5 +9,8 @@ lex.yy.c: scanner.l
 run: scanner
 	./scanner
 
+check:
+	
+
 clean:
 	rm -f scanner lex.yy.c
