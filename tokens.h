@@ -53,15 +53,22 @@ enum TOKEN {
     MULT,   // *
     DIV,    // /
     MOD,    // %
-    LESSER, // <
-    GREATER,// >
+    LT, // <
+    GT, // >
     INCR,   // ++
     DECR,   // --
+    LNOT,   // !
+    BNOT,  // ~
+    BAND,  // &
+    BOR,   // |
+    XOR,   // ^
+    LSHIFT, // <<
+    RSHIFT, // >>
 
     // Special symbols
     COMMA,  // ,
-    SEMI,   // ;
-    DQ,     // "
+    SEMICOLON,   // ;
+    DQ,     // " -> handle this in scanner
     OBO,    // (
     OBC,    // )
     CBO,    // {
@@ -80,9 +87,15 @@ enum TOKEN {
     REALLOC,
     FREE,
     DEFINE,
+    // handle fopen
+    // derive
+    // ifdef
+
+    // String library functions
+    //
+    PUTS,
     GETCH,
     STRLEN,
-    PUTS,
     STRCMP,
     STRCAT,
     STRCPY,
@@ -102,6 +115,7 @@ enum TOKEN {
     CHAR_CONST,
     SIGNED_CONST,
     STRING_CONST,
+    // unsigned
 
     // Arrays and functions
     ARR,
@@ -112,6 +126,6 @@ enum TOKEN {
     // UNKNOWN,
 
     // Include files
-    STRINGH,
-    MATH
+    // STRINGH,
+    // MATH
 };
