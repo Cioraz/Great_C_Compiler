@@ -49,7 +49,7 @@ enum TOKEN {
     LAND,   // &&
     ASSIGN, // =
     PLUS,   // +
-    SUB,    // -
+    MINUS,    // -
     MULT,   // *
     DIV,    // /
     MOD,    // %
