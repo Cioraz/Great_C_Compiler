@@ -1,7 +1,9 @@
+#ifndef TOKEN_H
+#define TOKEN_H
+
 enum TOKEN {
     // Keywords
-    // AUTO = 1,
-    AUTO,
+    AUTO=1,
     BREAK,
     CASE,
     CHAR,
@@ -22,17 +24,19 @@ enum TOKEN {
     REGISTER,
     RETURN,
     SHORT,
-    SIGNED,
+    SIGNED, // later handle
     SIZEOF,
     STATIC,
     STRUCT,
     SWITCH,
     TYPEDEF,
     UNION,
-    UNSIGNED,
+    //UNSIGNED, // later handle
     VOID,
     VOLATILE,
     WHILE,
+
+    PREPROCESSOR_INSTR,
 
     // Identifiers and comments
     IDENTIFIER,
@@ -113,7 +117,7 @@ enum TOKEN {
     INT_CONST,
     FLOAT_CONST,
     CHAR_CONST,
-    SIGNED_CONST,
+   // SIGNED_CONST, // later handle
     STRING_CONST,
     // unsigned
 
@@ -129,3 +133,5 @@ enum TOKEN {
     // STRINGH,
     // MATH
 };
+
+#endif

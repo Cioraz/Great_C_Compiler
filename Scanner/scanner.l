@@ -1,19 +1,19 @@
 %{
-#include <stdio.h>
 #include "tokens.h"
 uint32_t line_number=1;
 %}
 
-space [ ]
-alphabet [a-zA-Z]
-digit [0-9]
-newline [\n]
-tab [\t]
-single_char \'.\'
-underscore [_]
-invalid [`@$]
-string \"(\\[nt\"'\\]|[^"\n\\])*\"  
-identifier ({alphabet}|{underscore})({alphabet}|{digit}|{underscore})*
+preprocessor_dirs                           "#include"|"#define"|"#ifdef"|"#ifndef"|"#if"|"#else"|"#elif"|"#endif"|"#undef"|"#pragma"|"#error"|"#warning"
+space                                       [ ]
+alphabet                                    [a-zA-Z]
+digit                                       [0-9]
+newline                                     [\n]
+tab                                         [\t]
+single_char                                 \'.\'
+underscore                                  [_]
+invalid                                     [`@$]
+string                                      \"(\\[nt\"'\\]|[^"\n\\])*\"  
+identifier                                  ({alphabet}|{underscore})({alphabet}|{digit}|{underscore})*
 
 %%
 {space}* { /* ignore whitespace and read abt string regexp */ }
@@ -40,14 +40,12 @@ long { return LONG; }
 register { return REGISTER; }
 return { return RETURN; }
 short { return SHORT; }
-signed { return SIGNED; }
 sizeof\([^)]*\) { return SIZEOF; } 
 static { return STATIC; }
 struct { return STRUCT; }
 switch { return SWITCH; }
 typedef { return TYPEDEF; }
 union { return UNION; }
-unsigned { return UNSIGNED; }
 void { return VOID; }
 volatile { return VOLATILE; }
 while { return WHILE; }
@@ -84,7 +82,7 @@ while { return WHILE; }
 "}" { return CBC; }
 "#" { return HASH; }
 
-printf\([^)]*\) return PRINTF;
+printf return PRINTF;
 scanf return SCANF;
 malloc\([^)]*\) return MALLOC;
 calloc\([^)]*\) return CALLOC;
@@ -106,21 +104,11 @@ sqrt return SQRT;
 pow return POW;
 exp return EXP;
 
-[+-]?{digit}+(\.{digit}+)? {printf("number\n");}
-[+-]?[0-9]*\.[0-9]+ return FLOAT_CONST;
 {string} return STRING_CONST;
 {single_char} return CHAR_CONST;
-
-{identifier} { printf("identi"); return IDENTIFIER; }
-
 {identifier}\[({identifier}|{digit}+)\] return ARR;
+{preprocessor_dirs} return PREPROCESSOR_INSTR;
+[+-]?[0-9]*\.[0-9]+ return FLOAT_CONST;
+[+-]?{digit}+ return INT_CONST;
+{identifier} return IDENTIFIER;
 %%
-
-int main(int argc,char **argv){
-    yylex();
-    return 0;
-}
-
-int yywrap(){
-    return 1;
-}
