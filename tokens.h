@@ -42,7 +42,7 @@ enum TOKEN {
     IDENTIFIER,
     SLC,    // Single Line Comment
     MLCS,   // Multi-Line Comment Start
-    // MLCE,   // Multi-Line Comment End - Why
+    MLCE,   // Multi-Line Comment End - Why
 
     // Operators
     LEQ,    // <=

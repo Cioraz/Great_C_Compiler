@@ -1,3 +1,5 @@
+TEST_FILE ?= test1.c
+
 all: scanner
 
 scanner: lex.yy.c
@@ -10,7 +12,9 @@ run: scanner
 	./scanner
 
 check:
-	
+
+debug:
+	./scanner tests/$(TEST_FILE)
 
 clean:
 	rm -f lex.yy.c scanner

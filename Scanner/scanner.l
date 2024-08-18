@@ -50,6 +50,11 @@ void { return VOID; }
 volatile { return VOLATILE; }
 while { return WHILE; }
 
+"//" return SLC;
+"/*" return MLCS;
+"*/" return MLCE;
+
+
 "<=" { return LEQ; }
 ">=" { return GEQ; }
 "==" { return EQEQ; }
