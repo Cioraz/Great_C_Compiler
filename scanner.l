@@ -18,7 +18,7 @@ identifier ({alphabet}|{underscore})({alphabet}|{digit}|{underscore})*
 %%
 {space}* { /* ignore whitespace and read abt string regexp */ }
 {tab}* { /* ignore tabs */ }
-newline { line_number++; }
+{newline} { line_number++; }
 auto { return AUTO; }
 break { return BREAK; }
 case { return CASE; }
@@ -52,8 +52,6 @@ void { return VOID; }
 volatile { return VOLATILE; }
 while { return WHILE; }
 
-identifier { return IDENTIFIER; }
-
 "<=" { return LEQ; }
 ">=" { return GEQ; }
 "==" { return EQEQ; }
@@ -86,7 +84,7 @@ identifier { return IDENTIFIER; }
 "}" { return CBC; }
 "#" { return HASH; }
 
-printf return PRINTF;
+printf\([^)]*\) return PRINTF;
 scanf return SCANF;
 malloc\([^)]*\) return MALLOC;
 calloc\([^)]*\) return CALLOC;
@@ -108,10 +106,12 @@ sqrt return SQRT;
 pow return POW;
 exp return EXP;
 
-[+-]?{digit}+(\.{digit}+)? return SIGNED_CONST;
+[+-]?{digit}+(\.{digit}+)? {printf("number\n");}
 [+-]?[0-9]*\.[0-9]+ return FLOAT_CONST;
-string return STRING_CONST;
-single_char return CHAR_CONST;
+{string} return STRING_CONST;
+{single_char} return CHAR_CONST;
+
+{identifier} { printf("identi"); return IDENTIFIER; }
 
 {identifier}\[({identifier}|{digit}+)\] return ARR;
 %%
