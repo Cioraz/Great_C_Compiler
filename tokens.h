@@ -44,6 +44,10 @@ enum TOKEN {
     SLC,    // Single Line Comment
     MLCS,   // Multi-Line Comment Start
     MLCE,   // Multi-Line Comment End - Why
+    //
+    HEADER,
+    STRINGH,
+    MATH,
 
     // Operators
     LEQ,    // <=

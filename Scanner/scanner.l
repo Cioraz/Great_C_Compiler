@@ -92,6 +92,10 @@ while { return WHILE; }
 "}" { return CBC; }
 "#" { return HASH; }
 
+"#include"{space}*"<stdio.h>" return HEADER;
+"#include"{space}*"<string.h>" return STRINGH;
+"#include"{space}*"<math.h>" return MATH;
+
 main\(\) return MAIN;
 printf return PRINTF;
 scanf return SCANF;
@@ -201,13 +205,11 @@ int main(int argc, char *argv[])
 					doubleQuoteLine = line_number;
 					insertToSymbolTable(st, yytext, "SPECIAL SYMBOL");
 					break;
-                /*
 				case HEADER:
 				case STRINGH:
 				case MATH:
 					printf("%-50sHEADER\t\t\tLine %-20d\n",yytext, line_number);
 					break;
-                */
 				case MAIN:
 					printf("%-50sMAIN FUNCTION\t\t\tLine %-20d\n", yytext, line_number);
 					insertToSymbolTable(st, yytext, "IDENTIFIER");
