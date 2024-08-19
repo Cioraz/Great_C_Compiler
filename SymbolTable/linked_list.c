@@ -1,24 +1,7 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<stdbool.h>
-
-#define MAX_IDENTIFIER_LENGTH 31
-#define MAX_ATTR_LENGTH 100
-
-typedef struct {
-    char name[MAX_IDENTIFIER_LENGTH];
-    char attr[MAX_ATTR_LENGTH];
-} Token;
-
-typedef struct Node{
-    Token data;
-    struct Node *next;
-} Node;
-
-typedef struct{
-    Node *head;
-} SymbolTable;
+#include "../SymbolTable/linked_list.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 SymbolTable* createSymbolTable(){
     SymbolTable *table = (SymbolTable*)malloc(sizeof(SymbolTable));

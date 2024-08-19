@@ -37,6 +37,7 @@ enum TOKEN {
     WHILE,
 
     PREPROCESSOR_INSTR,
+    MAIN,
 
     // Identifiers and comments
     IDENTIFIER,
@@ -126,8 +127,8 @@ enum TOKEN {
     FUNC,
 
     // Errors
-    // NUM_ERR,
-    // UNKNOWN,
+    NUM_ERR,
+    UNKNOWN,
 
     // Include files
     // STRINGH,
